@@ -166,6 +166,19 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def display_data(df):
+    """The user must be able to ask you to show some rows of data upon request."""
+
+    start_loc = 0
+    view_data = input("\nWould you like to view 5 rows of individual trip data? Enter yes or no?\n").lower()
+
+    while view_data == 'yes':
+        print(df.iloc[start_loc:start_loc + 5])
+        start_loc += 5
+        view_data = input("Do you wish to continue? Enter yes or no: ").lower()
+
+# You can add this function to your main function as follows:
+
 def main():
     while True:
         city, month, day = get_filters()
@@ -175,11 +188,13 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        display_data(df)  # call to display_data function -Missing functionality
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
 
-
 if __name__ == "__main__":
-	main()
+    main()
+This function display_data(df) will ask the user if they want to see 5 rows of data from the DataFrame. If the user answers 'yes', it will print the first 5 rows of data and then ask again if the user wants to see the next 5 rows. This will continue until the user answers with something other than 'yes', at which point the function will exit and control will return to the main function.
+
